@@ -1,0 +1,51 @@
+<div class="container">
+
+    <h2 class="text-center mt-3 mb-3">Choisissez vos dates</h2>
+
+    <div class="section mt-2 mb-2">
+        {{ form_start(form)}}
+        <div class="input-group mx-auto" style="width: 1000px;">
+            <span class="input-group-text">{{ form_row(form.date_arrive)}}</span>
+            <span class="input-group-text">{{ form_row(form.date_depart)}}</span>
+            <span class="input-group-text">{{ form_row(form.category)}}</span>
+            <button type="col order-last" class="btn btn-warning">{{ button_label|default('Vérifier la disponibilité') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+        {% if chambresDispo is defined %}
+        <hr>
+        <p class="text-center"> Résultat(s) de votre recherche </p>
+        <h1 class="text-center">Choisissez votre chambre</h1>
+        {% if app.user %}
+            {% else  %}
+            <div class="alert alert-warning text-center" role="alert"> You need to connect to be able to reserve a chambre 
+                <a class="nav-item nav-link" href="{{ path('app_login')}} ">
+                <button type="button" class="btn btn-success"> SE CONNECTER </button>
+                </a>
+                <a class="nav-item nav-link" href="{{ path('app_register')}} "></i> 
+                <button type="button" class="btn btn-dark"> S'INSCRIRE </button>
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="container-fluid">
+
+          <div class="row">
+        {% for chambre in chambresDispo %}
+            <div class="col-12">
+              <div class="card">
+                {% include('include/_card.html.twig') %}
+              </div>
+            </div>
+        {% endfor %}
+
+          </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+</div>

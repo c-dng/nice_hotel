@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1 class="text-center mt-3">Messagerie</h1>
+
+    {# <p class="fw-bold">Expéditeur {{ messagerie.sender}}</p> #}
+    {# <p class="fw-bold">Date du message : {{ messagerie.createdAt }} </p> #}
+    <p class="fw-bold">Objet du message : {{ messagerie.objet}}</p>
+    <div class="card">
+        <div class="card-body">
+            {# contenu du message #}
+            <p class="fs-2 font-monospace">{{ messagerie.message}}</p>
+        </div>
+    </div>
+
+      {# {{ include('messagerie/_form.html.twig', {'button_label': 'Mettre à jour'}) }} #}
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" type="button" href="{{ path('app_messagerie_index') }}"> Retour à la liste</a>
+        <a class="btn btn-secondary" type="button" href="{{ path('app_messagerie_edit', {'id': messagerie.id}) }}">Editer</a>
+        {# bouton supprimer #}
+    {# {{ include('messagerie/_delete_form.html.twig') }} #}
+        <form method="post" action="{{ path('app_messagerie_delete', {'id': messagerie.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ messagerie.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+
+
+</div>
+
+  
+{% endblock %}

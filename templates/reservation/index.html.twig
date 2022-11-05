@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1 class="text-center mt-3">Liste des réservations</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Tarif_unit</th>
+                <th>Date_arrive</th>
+                <th>Date_depart</th>
+                <th>Total</th>
+                <th>Paiement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.nom }}</td>
+                <td>{{ reservation.tarifUnit }}</td>
+                <td>{{ reservation.dateArrive ? reservation.dateArrive|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.dateDepart ? reservation.dateDepart|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.total }}</td>
+                <td>{{ reservation.paiement ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}"><i class="fas fa-edit"></i></a>
+                    <a href="{{ path('app_reservation_modif_chambre', {'id': reservation.id}) }}"> Modif chambre</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<div class="container">
+
+    <h1 class="text-center mt-3"> <i class="fas fa-user"></i> Mon profil </h1>
+
+
+    <div class="container border">
+        <h2>Messagerie</h2>
+        <a class="btn btn-primary" href="{{ path('app_messagerie_user_new') }}">Envoyer un message</a>
+        <a class="btn btn-primary" href="{{ path('app_messagerie_user_new') }}">Consulter mes messages</a>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col text-center border mt-4 mb-4">
+            <h2 class="mt-3"> <i class="fas fa-info"></i> Mes informations </h2>
+                <hr>
+                <p>Prénom: {{ app.user.prenom|upper }}</p>
+                <p>Nom: {{ app.user.nom|upper }}</p>
+                <p>Adresse: {{ app.user.adresse|upper }}</p>
+                <p>Ville: {{ app.user.ville|upper }}</p>
+                <p>CP: {{ app.user.cp|upper }}</p>
+                <p>Pays: {{ app.user.pays|upper }}</p>
+                <p>Téléphone: {{ app.user.tel|upper }}</p>
+                <p>Email: {{ app.user.email }}</p>
+        </div>
+
+        <div class="col text-center border mt-4 mb-4">
+            {# debut accordéon réservations #}
+            <h2 class="mt-3">  <i class="far fa-calendar-alt"></i> Réservations </h2>
+            <hr>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+
+                    {% for item in app.user.reservations %}
+
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong> Réf. n°{{ item.id }} - réservée le {{ item.dateResa|date('D d F Y') }} </strong>
+                        </button>
+                    </h2>
+
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">   
+                            <h4> Récapitulatif de votre réservation : </h4>
+                            
+                            <p> - Séjour du {{ item.dateArrive|date('d/m/Y') }} au {{ item.dateDepart|date('d/m/Y') }} </p>
+                            <p> - {{ item.chambre.titre }} </p>
+                            <p> - {{ item.chambre.description }} </p>
+                            <p> 
+                                <img class="text-center" src="{{ asset('images/' ~ item.chambre.image) }}" alt="" style="width:300px;">
+                            </p>
+                            <p> - Total : {{ item.total }} </p>
+
+                            <p>
+                                Statut du paiement :
+                                {% if item.paiement == 1 %}
+                                    Payé
+                                {% else %}
+                                    Non Payé
+                                {% endif %}
+                            </p>
+
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            {# fin accordéon réservations#}
+        </div>
+
+    </div>
+
+</div>

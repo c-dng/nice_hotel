@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-xl-6">
+      <div class="card-body text-center">
+        <img class="text-center" src="{{ asset('images/' ~ chambre.image) }}" alt="" style="width:300px;">
+        <p class="card-text"></p>
+      </div>
+  </div>
+
+  <div class="col-xl-6">
+      <div class="card-body">
+        <h5 class="card-title"> {{ chambre.description}} </h5>
+        <p class="card-text"> {{ chambre.titre }} </p>
+        <p class="card-text"> {{ chambre.tarif }} € </p>
+        {# détail chambre #}
+        {# {{ path('app_user_product_show', {'id' : chambre.id} ) }} #}
+        <a class="btn btn-secondary text-center" href="#" role="button">Détail chambre</a>
+
+         <a href="{{ path('app_user_reservation', {
+                            'id' : chambre.id ,
+                            'date_arrive' : date_arrive.format('d-m-Y') ,
+                            'date_depart' : date_depart.format('d-m-Y') ,
+                    } ) }}"
+            class="btn btn-success text-center" role="button">Sélectionner cette chambre
+        </a>
+
+      </div>
+  </div>
+</div>

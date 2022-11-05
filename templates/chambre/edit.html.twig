@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Chambre{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <a class="btn btn-light mt-2 ms-2" href="{{ path('app_chambre_index') }}">
+		<i class="fas fa-undo-alt"></i>
+			Retour
+	</a>
+
+    <h1 class="text-center mt-3">Editer une chambre</h1>
+
+    {{ include('chambre/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    {{ include('chambre/_delete_form.html.twig') }}
+
+</div>
+
+
+{% endblock %}

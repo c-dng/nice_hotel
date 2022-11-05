@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+
+<h1 class="text-center mt-3">Messagerie</h1>
+
+
+    <p>{{ messagerie.message}}</p>
+
+    <a class="btn btn-primary mb-3" href="{{ path('app_messagerie_new') }}"> Ecrire un nouveau message</a>
+
+    <div class="col">
+        <p class="badge rounded-pill bg-secondary"> Message envoyés : {{ app.user.sent|length }}</p>
+        <p class="badge rounded-pill bg-primary"> Reçus : {{ app.user.received|length }}</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expéditeur</th>
+                <th>Objet</th>
+                <th>Contenu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for messagerie in messageries %}
+            <tr>
+                <td>{{ messagerie.id }}</td>
+                <td>{{ messagerie.sender }}</td>
+                <td>{{ messagerie.objet }}</td>
+                <td >
+                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                        {{ messagerie.message }}
+                    </span>
+               </td>
+
+                <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a class="btn btn-primary" type="button" href="{{ path('app_messagerie_show', {'id': messagerie.id}) }}"> Ouvrir <i class="fa-solid fa-envelope"></i></a>
+                        <a class="btn btn-secondary" type="button" href="{{ path('app_messagerie_edit', {'id': messagerie.id}) }}">Editer</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Pas de résultat(s) trouvé(s)</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}

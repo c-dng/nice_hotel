@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand ms-4 me-4" href="{{ path('app_home') }}"> NICE HOTEL </a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+				<li class="nav-item dropdown">
+					{# si l'user co a le rôle admin ça s'affiche #}
+					{% if is_granted('ROLE_ADMIN') %}
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-user-shield"></i>
+							ADMIN PANEL
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_chambre_index') }}">
+									<i class="fa-solid fa-bed"></i>
+									CHAMBRES
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_category_index') }}">
+									<i class="fas fa-th-large"></i>
+									CATÉGORIES
+								</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_reservation_index') }}">
+									<i class="fas fa-tasks"></i>
+									RESERVATIONS
+								</a>
+							</li>
+						</ul>
+					{% endif %}
+				</li>
+					{# pour tout le monde #}
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_hotel') }}">
+							<i class="fas fa-hotel"></i> L'HOTEL
+						</a>
+					</li>
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_restaurant') }}">
+							<i class="fas fa-utensils"></i> RESTAURANT
+						</a>
+					</li>
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_spa') }}">
+							<i class="fas fa-spa"></i> SPA
+						</a>
+					</li>
+						{% if app.user %}
+						{# si un simple user est co #}
+						{# on entre dans le bloc if si personne dans le bloc else #}
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_profil') }}">
+							<i class="fas fa-tasks"></i>
+							MON PROFIL
+						</a>
+					</li>
+					<li class="nav-item ms-4 me-2">
+						{# <a class="nav-link" href="">
+							<i class="far fa-comment-dots"></i>
+							MESSAGERIE
+						</a> #}
+					</li>
+
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}"> <i class="fas fa-sign-out-alt"></i>
+							DÉCONNEXION
+						</a>
+					</li>
+						{% else %}
+					
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_login') }}">
+							SE CONNECTER
+						</a>
+					</li>
+					<li class="nav-item ms-4 me-2">
+						<a class="nav-link" href="{{ path('app_register') }}">
+							S'INSCRIRE
+					</a>
+					</li>
+			{% endif %}
+
+		  </ul>
+		
+		<a href="{{ path('app_user') }}"><button class="btn btn-success me-2">JE RÉSERVE !</button></a>
+
+		<form class="d-flex">
+			<div class="social-list">
+				<li class="nav-item">
+					<a href="http://twitter.com" target="_blank" ><i class="fa fa-twitter ms-4 me-2" aria-hidden="true"></i></a>
+				</li>
+				<li class="nav-item">
+					<a href="http://facebook.com"><i class="fa fa-facebook ms-2 me-4" aria-hidden="true"></i></a>
+				</li>
+            </div>
+		</form>
+
+    </div>
+  </div>
+</nav>

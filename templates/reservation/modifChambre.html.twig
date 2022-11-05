@@ -1,0 +1,72 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer une chambre{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+<h1 class="text-center mt-3">Modification de la chambre  {{ reservation.chambre.numero }} </h1>
+<p></p>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">Chambre actuelle</th>
+			<th scope="col">Action</th>
+		</tr>
+	</thead>
+			<tbody>
+    
+                {% for chambre in chambreDispo %}
+
+				<tr>
+					<th scope="row"> {{ reservation.chambre.numero }} </th>
+                    
+                    <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Choisir la chambre {{ chambre.numero }}
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Attention </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p> Etes-vous sûr(e) de vouloir modifier la chambre {{ reservation.chambre.numero }}
+                            pour la chambre {{ chambre.numero }} ? </p
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                          <button type="button" class="btn btn-primary"><a href="{{ path('app_set_chambre_reservation', { 'id' : reservation.id, 'num' : chambre.numero }) }}">Modif</a></button>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    </td>
+					
+                    {# <td><a href="{{ path('app_set_chambre_reservation', { 'id' : reservation.id, 'num' : chambre.numero }) }}">Modif</a></td> #}
+
+				</tr>
+				{% endfor %}
+			</tbody>
+</table>
+
+    {# <a href="{{ path('app_set_chambre_reservation', { 'id' : reservation.id, 'num' : chambre.numero }) }}">Modif</a>
+        
+    {% endfor %} #}
+
+</div>
+{% endblock %}
+
+
+
+
